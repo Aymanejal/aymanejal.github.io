@@ -58,6 +58,14 @@ main { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
   gap: 3rem; align-items: center;
   padding: 4rem 0 5rem;
 }
+/* Portrait */
+.portrait {
+  display: block; width: 132px; height: 132px; object-fit: cover;
+  border-radius: 50%; margin: 0 0 1.75rem;
+  box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--rule);
+}
+@media (max-width: 900px) { .portrait { width: 104px; height: 104px; } }
+
 h1 {
   font-family: var(--display); font-weight: 800; font-stretch: 62%;
   font-size: clamp(4rem, 10vw, 8.5rem); line-height: .86; letter-spacing: -.01em;
