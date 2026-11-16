@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Aymane Jaloul — Sécurité réseau & détection d'intrusion</title>
+  <meta name="description" content="Élève ingénieur ENSEEIHT (parcours Architecture, Systèmes et Réseaux). Sécurité réseau, détection d'intrusion (Suricata, Wireshark), sécurité IoT. Recherche un stage de 2e année en réseaux ou cybersécurité.">
+  <meta property="og:title" content="Aymane Jaloul — Sécurité réseau & détection d'intrusion">
+  <meta property="og:description" content="Élève ingénieur ENSEEIHT, parcours ASR. Projets : IDS Suricata + Wireshark, simulateur de routeur IP en Ada.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+
+  <header class="top">
+    <a class="brand" href="#">aymane jaloul</a>
+    <nav aria-label="Navigation principale">
+      <a href="#experience">Expérience</a>
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-cv" href="CV_Aymane_Jaloul.pdf" download>CV (PDF)</a>
+    </nav>
+  </header>
+
+  <main id="contenu">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Aymane<br>Jaloul</h1>
+        <p class="lede">Élève ingénieur à l'ENSEEIHT, parcours Architecture, Systèmes et Réseaux. Je m'intéresse à la sécurité des réseaux et des objets connectés&nbsp;: voir ce qui passe sur le fil, et savoir quand ce n'est pas normal.</p>
+        <p class="status"><span class="dot" aria-hidden="true"></span><span>Je cherche un stage de 3&nbsp;mois en réseaux ou en cybersécurité pour l'été 2027, à Toulouse ou ailleurs.</span></p>
+        <div class="actions">
+          <a class="btn primary" href="#contact">Me contacter</a>
+          <a class="btn" href="CV_Aymane_Jaloul.pdf" download>Télécharger mon CV</a>
+        </div>
+      </div>
+
+      <figure class="console" aria-label="Extrait de mon labo : une alerte Suricata et le paquet correspondant dans Wireshark">
+        <div class="console-bar">
+          <span>suricata-ids : /var/log/suricata/fast.log</span>
+        </div>
+        <ol class="log" id="log">
+          <li><span class="t">08/14-10:42:07</span> <span class="sid">[1:1000001:1]</span> <span class="msg">TEST ALERTE - Ping detecte</span> <span class="flow">{ICMP} 192.168.100.20 → 192.168.100.10</span></li>
+          <li><span class="t">08/14-10:43:31</span> <span class="sid">[1:1000002:1]</span> <span class="msg">TEST ALERTE - Scan TCP detecte</span> <span class="flow">{TCP} 192.168.100.20:41522 → 192.168.100.10:22</span></li>
+          <li><span class="t">08/14-10:43:31</span> <span class="sid">[1:1000002:1]</span> <span class="msg">TEST ALERTE - Scan TCP detecte</span> <span class="flow">{TCP} 192.168.100.20:41522 → 192.168.100.10:443</span></li>
+          <li><span class="t">08/14-10:43:31</span> <span class="sid">[1:1000002:1]</span> <span class="msg">TEST ALERTE - Scan TCP detecte</span> <span class="flow">{TCP} 192.168.100.20:41522 → 192.168.100.10:53</span></li>
+        </ol>
+        <div class="console-bar sub"><span>wireshark : tcp.flags.syn==1 and tcp.flags.ack==0</span></div>
+        <ol class="log pkts">
+          <li><span class="t">192.168.100.20</span> → <span class="t">192.168.100.10</span> TCP 41522 → 22 <b>[SYN]</b></li>
+          <li><span class="t">192.168.100.10</span> → <span class="t">192.168.100.20</span> TCP 22 → 41522 [RST, ACK]</li>
+        </ol>
+        <figcaption>Une alerte, le paquet qui l'a déclenchée. Reconstitution de mon labo de stage (horodatages et ports illustratifs).</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ EXPÉRIENCE ============ -->
+    <section id="experience" class="block">
+      <h2>Expérience</h2>
+      <article class="xp">
+        <div class="xp-when">Juin–juillet 2026<br><span>6 semaines</span></div>
+        <div class="xp-body">
+          <h3>Stagiaire en cybersécurité, sécurité réseau</h3>
+          <p class="where">SRM Souss-Massa, Agadir (Maroc)</p>
+          <p>Mise en place d'une chaîne de détection d'intrusion dans un laboratoire virtualisé, puis validation de chaque alerte au niveau paquet.</p>
+          <ul>
+            <li>Déploiement de <strong>Suricata</strong> en mode IDS sur Ubuntu Server, avec plus de 52&nbsp;000 règles Emerging Threats chargées via suricata-update et journalisation en fast.log et eve.json.</li>
+            <li>Écriture de règles de détection personnalisées (ICMP, TCP SYN) pour obtenir des alertes fiables sur des pings et des scans Nmap.</li>
+            <li>Capture et analyse du trafic avec <strong>tshark et Wireshark</strong>, filtres d'affichage pour isoler les paquets de scan.</li>
+            <li>Corrélation de bout en bout&nbsp;: chaque alerte Suricata rapprochée du paquet correspondant (adresses, horodatage) pour écarter les faux positifs.</li>
+            <li>Diagnostic d'une absence d'alertes&nbsp;: le trafic de test sortait par l'interface NAT, hors du segment surveillé. Tests recentrés sur le réseau interne.</li>
+          </ul>
+          <p class="stack">Suricata, Wireshark, tshark, tcpdump, Nmap, Ubuntu Server, Kali Linux, VirtualBox</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ PROJETS ============ -->
+    <section id="projets" class="block">
+      <h2>Projets</h2>
+
+      <article class="project">
+        <header>
+          <h3>Laboratoire de détection d'intrusion</h3>
+          <p class="kind">Stage, juin–juillet 2026</p>
+        </header>
+        <div class="project-grid">
+          <div>
+            <h4>Le problème</h4>
+            <p>Un IDS qui tourne ne prouve rien tant qu'on ne sait pas ce qu'il voit. L'objectif était de construire un labo où chaque alerte peut être vérifiée paquet par paquet.</p>
+            <h4>Ce que j'ai construit</h4>
+            <p>Deux machines virtuelles sur un réseau interne isolé (192.168.100.0/24)&nbsp;: une sonde Suricata sous Ubuntu Server et une machine Kali qui génère le trafic (ping, scan Nmap) et analyse les captures dans Wireshark.</p>
+            <h4>Ce qui a résisté</h4>
+            <p>Aucune alerte malgré 52&nbsp;000 règles. J'ai vérifié les hypothèses une par une (connectivité, segmentation, pertinence des règles)&nbsp;: tcpdump a montré que le trafic arrivait bien, mais que les règles ET ne ciblent pas un scan «&nbsp;propre&nbsp;». Deux règles locales ont réglé le problème.</p>
+          </div>
+          <div class="diagram" aria-label="Schéma du labo">
+<pre><code>  ┌──────────────────┐        intnet        ┌──────────────────┐
+  │  kali-attacker   │   192.168.100.0/24   │   Suricata-IDS   │
+  │  eth1 .20        │ ───────────────────▶ │   enp0s3 .10     │
+  │  Nmap, Wireshark │                      │   fast.log       │
+  └────────┬─────────┘                      │   eve.json       │
+           │ eth0 (NAT)                     └──────────────────┘
+           ▼
+        Internet   ← hors du segment surveillé</code></pre>
+<pre class="rule"><code>alert icmp any any -> $HOME_NET any (msg:"TEST ALERTE - Ping detecte"; sid:1000001; rev:1;)
+alert tcp any any -> $HOME_NET any (msg:"TEST ALERTE - Scan TCP detecte"; flags:S; sid:1000002; rev:1;)</code></pre>
+          </div>
+        </div>
+        <p class="links"><a href="https://github.com/Aymanejal/suricata-ids-lab">Code et rapport sur GitHub</a></p>
+      </article>
+
+      <article class="project">
+        <header>
+          <h3>Simulateur de routeur IP avec cache</h3>
+          <p class="kind">Projet de 1<sup>re</sup> année, 2025–2026, équipe de trois</p>
+        </header>
+        <div class="project-grid">
+          <div>
+            <h4>Le problème</h4>
+            <p>Chercher la bonne route dans toute la table pour chaque paquet coûte cher. Le projet&nbsp;: un routeur IPv4 en Ada qui choisit la route au masque le plus long, puis un cache pour éviter les recherches répétées.</p>
+            <h4>Ma part</h4>
+            <p>J'ai écrit la table de routage en liste chaînée, la fonction de correspondance adresse/masque et le cœur du cache en liste chaînée (recherche, insertion, suppression, taille). Le cache existe aussi en arbre préfixe, parcouru bit à bit.</p>
+            <h4>Ce que j'en retiens</h4>
+            <p>Un bug de conception&nbsp;: le cache stockait l'IP du paquet au lieu du réseau, donc deux paquets du même réseau créaient deux entrées. Corrigé en ne gardant que les réseaux, avec des compteurs pour les politiques FIFO, LRU et LFU.</p>
+          </div>
+          <div class="diagram">
+<pre class="rule"><code>function Route_Convient (IP_Reseau, Masque, IP_Paquet : T_Adresse_IP)
+   return Boolean is
+begin
+   return (IP_Reseau and Masque) = (IP_Paquet and Masque);
+end Route_Convient;</code></pre>
+<pre><code>$ ./utilisation_routeur_cache routeur_LL -s
+Nombre de requêtes : 11
+Défauts du cache   : 4
+Taux de défaut     : 0.36</code></pre>
+          </div>
+        </div>
+        <p class="stack">Ada, listes chaînées, arbre préfixe (trie), tests unitaires avec pragma Assert</p>
+        <p class="links"><a href="https://github.com/Aymanejal/routeur-ip-ada">Code, manuel et rapport sur GitHub</a></p>
+      </article>
+
+      <article class="project">
+        <header>
+          <h3>Réseau d'entreprise virtualisé : FAI, DNS et DMZ</h3>
+          <p class="kind">Projet de 1<sup>re</sup> année, 2025–2026</p>
+        </header>
+        <div class="project-grid">
+          <div>
+            <h4>Le problème</h4>
+            <p>Construire de bout en bout un réseau réaliste dans VirtualBox&nbsp;: un réseau interne, un fournisseur d'accès, des services exposés, et faire passer le trafic correctement entre tous.</p>
+            <h4>Ce que nous avons construit</h4>
+            <p>Une topologie avec un FAI, un service DNS et une zone démilitarisée (DMZ) qui sépare les services accessibles de l'extérieur du réseau interne. Adressage automatique par DHCP, traduction d'adresses par NAT, routage statique puis dynamique avec RIP.</p>
+          </div>
+          <div>
+            <h4>Ce que j'y ai appris</h4>
+            <p>Comment un réseau se découpe en zones de confiance, et pourquoi la DMZ est la première ligne de défense&nbsp;: c'est exactement ce qu'un IDS doit surveiller.</p>
+          </div>
+        </div>
+        <p class="stack">VirtualBox, DHCP, NAT, DNS, DMZ, routage statique, RIP</p>
+      </article>
+    </section>
+
+    <!-- ============ COMPÉTENCES ============ -->
+    <section id="competences" class="block">
+      <h2>Compétences</h2>
+      <div class="skills">
+        <div>
+          <h3>Sécurité réseau</h3>
+          <p>IDS/IPS (Suricata), écriture de règles, analyse de trafic (Wireshark, tshark, tcpdump), reconnaissance (Nmap), corrélation d'alertes, pratique sur Hack The Box</p>
+        </div>
+        <div>
+          <h3>Réseaux</h3>
+          <p>TCP/IP, routage IPv4 statique et dynamique (RIP), NAT, DHCP, DNS, DMZ et segmentation, adressage et masques, ICMP, ARP</p>
+        </div>
+        <div>
+          <h3>Systèmes</h3>
+          <p>Linux (Ubuntu Server, Kali), administration en ligne de commande, nmcli, scp, droits et permissions, virtualisation (VirtualBox)</p>
+        </div>
+        <div>
+          <h3>Programmation</h3>
+          <p>C, Java, OCaml, Ada, MATLAB, structures de données (listes chaînées, arbres), tests unitaires</p>
+        </div>
+        <div>
+          <h3>Langues</h3>
+          <p>Arabe (langue maternelle), français et anglais (courant), espagnol (notions)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FORMATION ============ -->
+    <section id="formation" class="block">
+      <h2>Formation</h2>
+      <ol class="edu">
+        <li>
+          <div class="xp-when">2025–2028</div>
+          <div>
+            <h3>Diplôme d'ingénieur, Sciences du Numérique</h3>
+            <p>ENSEEIHT (Toulouse INP), parcours Architecture, Systèmes et Réseaux en 2<sup>e</sup> année</p>
+          </div>
+        </li>
+        <li>
+          <div class="xp-when">2023–2025</div>
+          <div>
+            <h3>Classes préparatoires aux grandes écoles</h3>
+            <p>CPGE Reda Slaoui, Agadir</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="block contact">
+      <h2>Contact</h2>
+      <p class="lede">Un stage, un projet, une question sur mon labo&nbsp;: écrivez-moi, je réponds vite.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:jaloulaymane11@gmail.com">jaloulaymane11@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/aymane-jaloul">LinkedIn</a></li>
+        <li><a href="https://github.com/Aymanejal">GitHub</a></li>
+        <li><a href="CV_Aymane_Jaloul.pdf" download>CV en PDF</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Aymane Jaloul, <span id="year">2026</span>. Site statique hébergé sur GitHub Pages.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
